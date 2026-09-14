@@ -91,23 +91,32 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  int count = 10;
   while (1)
   {
-	  HAL_GPIO_WritePin(GPIOA, RED_LED1_Pin | GREEN_LED2_Pin, GPIO_PIN_RESET);
-	  HAL_GPIO_WritePin(GPIOA, RED_LED2_Pin | YELLOW_LED1_Pin | YELLOW_LED2_Pin | GREEN_LED1_Pin, GPIO_PIN_SET);
-	  HAL_Delay(3000);
+	  if (count > 7){
+		  HAL_GPIO_WritePin(GPIOA, RED_LED1_Pin | GREEN_LED2_Pin, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(GPIOA, RED_LED2_Pin | YELLOW_LED1_Pin | YELLOW_LED2_Pin | GREEN_LED1_Pin, GPIO_PIN_SET);
+		  count--;
+	  } else if (count > 5){
+		  HAL_GPIO_WritePin(GPIOA, RED_LED1_Pin | YELLOW_LED2_Pin, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(GPIOA, RED_LED2_Pin | YELLOW_LED1_Pin | GREEN_LED1_Pin | GREEN_LED2_Pin, GPIO_PIN_SET);
+		  count--;
+	  } else if (count > 2){
+		  HAL_GPIO_WritePin(GPIOA, RED_LED2_Pin | GREEN_LED1_Pin, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(GPIOA, RED_LED1_Pin | YELLOW_LED1_Pin | GREEN_LED2_Pin | YELLOW_LED2_Pin, GPIO_PIN_SET);
+		  count--;
+	  } else {
+		  HAL_GPIO_WritePin(GPIOA, RED_LED2_Pin | YELLOW_LED1_Pin, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(GPIOA, RED_LED1_Pin | GREEN_LED1_Pin | GREEN_LED2_Pin | YELLOW_LED2_Pin, GPIO_PIN_SET);
+		  count--;
+	  }
 
-	  HAL_GPIO_WritePin(GPIOA, RED_LED1_Pin | YELLOW_LED2_Pin, GPIO_PIN_RESET);
-	  HAL_GPIO_WritePin(GPIOA, RED_LED2_Pin | YELLOW_LED1_Pin | GREEN_LED1_Pin | GREEN_LED2_Pin, GPIO_PIN_SET);
-	  HAL_Delay(2000);
+	  if (count <= 0){
+		  count = 10;
+	  }
 
-	  HAL_GPIO_WritePin(GPIOA, RED_LED2_Pin | GREEN_LED1_Pin, GPIO_PIN_RESET);
-	  HAL_GPIO_WritePin(GPIOA, RED_LED1_Pin | YELLOW_LED1_Pin | GREEN_LED2_Pin | YELLOW_LED2_Pin, GPIO_PIN_SET);
-	  HAL_Delay(3000);
-
-	  HAL_GPIO_WritePin(GPIOA, RED_LED2_Pin | YELLOW_LED1_Pin, GPIO_PIN_RESET);
-	  HAL_GPIO_WritePin(GPIOA, RED_LED1_Pin | GREEN_LED1_Pin | GREEN_LED2_Pin | YELLOW_LED2_Pin, GPIO_PIN_SET);
-	  HAL_Delay(2000);
+	  HAL_Delay(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
