@@ -112,21 +112,28 @@ int main(void)
 		  count = 10;
 	  }
 
-	  display7SEG(10 - count);
+	  int led_count = 0;
 
 	  if (count > 7){
 		  HAL_GPIO_WritePin(GPIOA, RED_LED1_Pin | GREEN_LED2_Pin, GPIO_PIN_RESET);
 		  HAL_GPIO_WritePin(GPIOA, RED_LED2_Pin | YELLOW_LED1_Pin | YELLOW_LED2_Pin | GREEN_LED1_Pin, GPIO_PIN_SET);
+		  led_count = count - 5;
 	  } else if (count > 5){
 		  HAL_GPIO_WritePin(GPIOA, RED_LED1_Pin | YELLOW_LED2_Pin, GPIO_PIN_RESET);
 		  HAL_GPIO_WritePin(GPIOA, RED_LED2_Pin | YELLOW_LED1_Pin | GREEN_LED1_Pin | GREEN_LED2_Pin, GPIO_PIN_SET);
+		  led_count = count - 5;
 	  } else if (count > 2){
 		  HAL_GPIO_WritePin(GPIOA, RED_LED2_Pin | GREEN_LED1_Pin, GPIO_PIN_RESET);
 		  HAL_GPIO_WritePin(GPIOA, RED_LED1_Pin | YELLOW_LED1_Pin | GREEN_LED2_Pin | YELLOW_LED2_Pin, GPIO_PIN_SET);
+		  led_count = count - 2;
 	  } else {
 		  HAL_GPIO_WritePin(GPIOA, RED_LED2_Pin | YELLOW_LED1_Pin, GPIO_PIN_RESET);
 		  HAL_GPIO_WritePin(GPIOA, RED_LED1_Pin | GREEN_LED1_Pin | GREEN_LED2_Pin | YELLOW_LED2_Pin, GPIO_PIN_SET);
+		  led_count = count;
 	  }
+
+	  display7SEG(led_count);
+
 	  count--;
 
 	  HAL_Delay(1000);
